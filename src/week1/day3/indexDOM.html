@@ -1,9 +1,44 @@
 <!-- Take this file and open it on a browser, then open the console
     inside developer tools -->
+
+    <p id="p2">some text</p>
+    <button id="button">click me to show prompt</button><br>
+
+    <button id="backgroundButton">click me to change background color!</button><br>
 <script>
     (function(){
         "use strict";
+    
+        document.title = "title set by script";
+
+        let span = document.createElement("span");
+        let spanText = document.createTextNode("span created by code");
+        span.appendChild(spanText);
+        document.body.appendChild(span);
+
+        let h3 = document.createElement("h3");
+        let hText = document.createTextNode("h3 created");
+        h3.appendChild(hText);
+        document.body.appendChild(h3);
+
+        document.getElementById("p2").style.color = "blue";
+
+        document.getElementById("backgroundButton").onclick = function changeBgColor() {
+            document.body.style.backgroundColor = "red";
+        }
+
+        document.getElementById("button").onclick = function addElements() {
+           let answer = window.prompt("How many p elements you want to add?");
+           let numericalAnswer = Number(answer);
+           for (let index = 1; index <= numericalAnswer; index++) {
+              let para = document.createElement("p");
+              let text =  document.createTextNode("this is the number " + index + " paragraph");
+              para.appendChild(text);
+              document.body.appendChild(para);
+           }
+        }
     })()
+
 </script>
 
 <!-- Now it's your turn to make some changes

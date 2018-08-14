@@ -1,10 +1,25 @@
-const express = ;
+const express = require('express');
+var fs = require("fs");
 const app = express();
 const port = 3000;
 
 app.get('/', (req, res) => {
     res.send('Hello There!');
 })
+
+app.get('/random',(req,res) => {
+    res.send('Your random number between 0 and 100 is: ' + Math.floor(Math.random() * 101));
+})
+
+app.get('/json', function(req, res) {
+  res.json('This is a json response');
+});
+
+app.get('/loadup', function(req,res){
+    var contents = fs.readFileSync("jsonExercise.json");
+    var jsonContent = JSON.parse(contents);
+    res.send(jsonContent);
+});
 
 app.listen(port, () => {
     console.log('Example server listening on port ' + port);

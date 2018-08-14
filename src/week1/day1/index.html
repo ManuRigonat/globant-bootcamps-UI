@@ -1,16 +1,64 @@
 <!-- Take this file and open it on a browser, then open the console
     inside developer tools -->
 <script>
-    var Animal = (function(type) {
-        this.type = type;
-    });
+    class Animal {
 
-    Animal.prototype.talk = function() {
-        console.log(`Hi, I'm an Animal, but also a ${this.type}`);
-    };
+        constructor(type,food,age) {
+            this._type = type;
+            this._age = age;
+            this._food = food;
+        }
 
-    let rabbit = new Animal("Rabbit");
+        set setType(type) {
+            this._type = type;
+        }
+        get getType() {
+            return this._type;
+        }
+        set setAge(age) {
+            this._age = age;
+        }
+        get getAge() {
+            return this._age;
+        }
+        set setFood(food) {
+            this._food = food;
+        }
+        get getFood() {
+            return this._food;
+        }
+
+        talk() {
+            "use strict";
+            console.log('Hi im a ' + this.getType + ' i like eat ' + this.getFood
+                        + ' and i am ' + this.getAge + ' years old');
+        }
+        walk() {
+            "use strict";
+            console.log('I am walking!');
+        }
+        swim() {
+            "use strict";
+            console.log('I am swimming!')
+        }
+    }
+    class Bird extends Animal{
+
+        constructor(food,age){
+            super('Bird', food, age);
+        }
+        swim() {
+            "use strict";
+            console.log('I cannot swim!')
+        }
+    }
+    let rabbit = new Animal("Rabbit", "carrots", 2);
     rabbit.talk();
+    rabbit.walk();
+    rabbit.swim();
+    let pajarito = new Bird("seeds", 3);
+    pajarito.talk();
+    pajarito.swim();
 </script>
 
 <!-- Now it's your turn to make some changes

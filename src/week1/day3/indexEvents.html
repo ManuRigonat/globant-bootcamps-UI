@@ -1,8 +1,36 @@
 <!-- Take this file and open it on a browser, then open the console
 inside developer tools -->
+
+<button id="dateButton">click me to show date</button>
+<button>clickea perro</button>
+<p id="date"></p><br>
+
+
+<p>This page turns violet when you hold the V key.</p>
 <script>
     (function(){
         "use strict";
+        document.getElementById("dateButton").onclick = showDate;
+        
+        function showDate() {
+          document.getElementById("date").innerHTML = Date();
+        }
+        document.body.addEventListener("click", event => {
+          if (event.target.nodeName == "BUTTON") {
+            console.log("you clicked:" + event.target.textContent + " button");
+          }
+        });
+        window.addEventListener("keydown", event => {
+          if (event.key == "v") {
+            document.body.style.background = "violet";
+          }
+        });
+        window.addEventListener("keyup", event => {
+          if (event.key == "v") {
+            document.body.style.background = "";
+           }
+        });
+
     })()
 </script>
 
