@@ -16,7 +16,6 @@ angular
   }
 
   $scope.saveBeer = function saveBeer(beerName,beerIBU) {
-     
      if(!beerService.existsBeer(beerName,$scope.beers)) {
        $scope.beers = beerService.saveBeer(beerName,beerIBU,$scope.beers);
        $window.alert("Beer added");
