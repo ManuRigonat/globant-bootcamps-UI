@@ -3,7 +3,7 @@
 angular
     .module('proyectoAngularApp')
     .service('beerService', function() {
-        const beers = [
+       const beers = [
             {
               name: 'Ipa',
               IBU: 2007
@@ -22,23 +22,34 @@ angular
             }
           ];
       
-      this.getBeers = function getBeers(){
-        return beers;
-      }
-      this.equalBeers = function(aBeer,anotherBeer){
-        return (aBeer === anotherBeer);
-      }
+       this.getBeers = function getBeers(){
+         return beers;
+       }
+       this.equalBeers = function(aBeer,anotherBeer){
+         return (aBeer === anotherBeer);
+       }
+       this.setName = 
       
-      this.deleteBeer = function deleteBeer (beer,beersArray) { 
+       this.deleteBeer = function deleteBeer (beer,beersArray) { 
          let arrayCopy = [];
          for(let indexBeer in beersArray){
-             if(!this.equalBeers(beersArray[indexBeer],beer)){
-               arrayCopy.push(beersArray[indexBeer]);
-             }
+           if(!this.equalBeers(beersArray[indexBeer],beer)){
+             arrayCopy.push(beersArray[indexBeer]);
+           }
          }
-         //beerysArray = angular.copy(arrayCopy);
-         //return beersArray
          return arrayCopy;
-         }
+       }
+      this.saveBeer = function saveBeer(beerName,beerIBU,beersArray) {
+        beersArray.push({name: beerName, IBU: beerIBU});
+        return beersArray;
+      }
+
+      this.updateBeer = function updateBeer(oldBeer, newBeerName, newBeerIBU){
+        
+        oldBeer.name = newBeerName;
+        oldBeer.IBU = newBeerIBU;
+        
+        return oldBeer;
+      };
      
   });

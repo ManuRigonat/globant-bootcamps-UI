@@ -2,34 +2,43 @@
 
 angular
       .module('proyectoAngularApp')
-.controller('modalCtrl', function($scope, $mdDialog) {
+.controller('modalCtrl',['$scope', '$mdDialog', function($scope, $mdDialog,) {
 
   //FIXME
-  $scope.showAdvanced = function(beerIndex) {
+  $scope.showAdvanced = function() {
     $mdDialog.show({
-      controller: DialogController,
-      templateUrl: 'views/modalView.html',
-      parent: angular.element(document.body),
-
+       controller: DialogController,
+       templateUrl: 'views/modalView.html',
+       parent: angular.element(document.body)
     })
   };
 
-  $scope.showAlert = function(beer) { //working
+  $scope.showAdvancedEdit = function(beerIndex) {
+     
+     $scope.actualBeer = $scope.beers[beerIndex];
+     $scope.beerIndex = beerIndex;
+     $mdDialog.show({
+       scope: $scope,
+       controller: DialogController,
+       templateUrl: 'views/modalEditView.html',
+       parent: angular.element(document.body)
+    })
+  };
+
+  $scope.showAlert = function(beer) { 
     $mdDialog.show(
       $mdDialog.alert()
         .parent(angular.element(document.querySelector('#popupContainer')))
         .clickOutsideToClose(true)
         .title('Beer: ' + beer.name)
         .textContent('IBU: ' + beer.IBU)
-        .ariaLabel('Alert Dialog Demo')
+        .ariaLabel('Alert Dialog')
         .ok('Cerrar')
     );
   };
 
   function DialogController($scope, $mdDialog) {
-    $scope.hide = function() {
-      $mdDialog.hide();
-    };
+    
 
     $scope.cancel = function() {
       $mdDialog.cancel();
@@ -37,7 +46,7 @@ angular
   }
 
 
-});
+}]);
 
 
 /* trying use localStorage

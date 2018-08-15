@@ -1,9 +1,12 @@
 <div ng-controller="modalCtrl">
   <div class="container" ng-controller="beerController" >
-    <p>Add/Update Beer</p>
+    <p>Add Beer</p>
+    <script>
+    console.log(beer);
+    </script>
     <form>
-      Beer name:  <input type="text" name="name" ng-model="name" value="{{ name }}" required><br>
-     IBU: <input type="number" name="IBU" ng-model="IBU" value="{{ IBU }}" required><br><br>
+      Beer name:  <input type="text" name="name" ng-model="name" required><br>
+     IBU: <input type="number" name="IBU" ng-model="IBU" required><br><br>
       <button type="button" ng-click="saveBeer(name,IBU)" class="btn btn-primary">Save changes</button><br><br>
       <button type="reset" ng-click="cancel()" class="btn btn-danger">Cancel</button>
    </form>
