@@ -24,11 +24,24 @@ angular
       
        this.getBeers = function getBeers(){
          return beers;
-       }
+       };
+
        this.equalBeers = function(aBeer,anotherBeer){
          return (aBeer === anotherBeer);
-       }
-       this.setName = 
+       };
+
+       this.compareBeerNames = function compareBeerNames(aBeerName, anotherBeerName){
+         return (aBeerName === anotherBeerName);
+       };
+
+       this.existsBeer = function existsBeer(aBeer,beersArray){
+         for(let indexBeer in beersArray){
+           if(this.compareBeerNames(aBeer,beersArray[indexBeer].name)){
+             return true;
+           }
+         }
+         return false;
+       }; 
       
        this.deleteBeer = function deleteBeer (beer,beersArray) { 
          let arrayCopy = [];
@@ -38,17 +51,16 @@ angular
            }
          }
          return arrayCopy;
-       }
+       };
+
       this.saveBeer = function saveBeer(beerName,beerIBU,beersArray) {
         beersArray.push({name: beerName, IBU: beerIBU});
         return beersArray;
-      }
+      };
 
       this.updateBeer = function updateBeer(oldBeer, newBeerName, newBeerIBU){
-        
         oldBeer.name = newBeerName;
         oldBeer.IBU = newBeerIBU;
-        
         return oldBeer;
       };
      

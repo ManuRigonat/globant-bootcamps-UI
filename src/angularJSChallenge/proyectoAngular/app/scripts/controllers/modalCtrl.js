@@ -14,7 +14,6 @@ angular
   };
 
   $scope.showAdvancedEdit = function(beerIndex) {
-     
      $scope.actualBeer = $scope.beers[beerIndex];
      $scope.beerIndex = beerIndex;
      $mdDialog.show({
@@ -38,8 +37,6 @@ angular
   };
 
   function DialogController($scope, $mdDialog) {
-    
-
     $scope.cancel = function() {
       $mdDialog.cancel();
     };
