@@ -1,5 +1,13 @@
 "use strict";
 
+/**
+ * @ngdoc function
+ * @name proyectoAngularApp.service:beerService
+ * @description
+ * # modalService
+ * Service of the proyectoAngularApp
+ */
+
 angular
     .module('proyectoAngularApp')
     .service('beerService', function() {
@@ -21,20 +29,20 @@ angular
               IBU: 1995
             }
           ];
-      
-       this.getBeers = function getBeers(){
+       
+       this.getBeers = function getBeers() {
          return beers;
        };
 
-       this.equalBeers = function(aBeer,anotherBeer){
+       this.equalBeers = function(aBeer,anotherBeer) {
          return (aBeer === anotherBeer);
        };
 
-       this.compareBeerNames = function compareBeerNames(aBeerName, anotherBeerName){
+       this.compareBeerNames = function compareBeerNames(aBeerName, anotherBeerName) {
          return (aBeerName === anotherBeerName);
        };
 
-       this.existsBeer = function existsBeer(aBeer,beersArray){
+       this.existsBeer = function existsBeer(aBeer,beersArray) {
          for(let indexBeer in beersArray){
            if(this.compareBeerNames(aBeer,beersArray[indexBeer].name)){
              return true;
