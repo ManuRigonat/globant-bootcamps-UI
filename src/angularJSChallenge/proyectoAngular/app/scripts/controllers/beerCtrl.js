@@ -10,37 +10,49 @@
 
 angular
       .module('proyectoAngularApp')
-.controller('beerController',['$scope','$window','beerService',
-           function($scope, $window, beerService) {
-  $scope.modalView = true;
+.controller('beerController',['$scope','$window','beerService', '$mdDialog',
+           function($scope, $window, beerService, $mdDialog) {
+  
   $scope.beers = beerService.getBeers();
-
-  $scope.hideModal = function() {
-    $scope.modalView = false;
-   };
-  
-  $scope.deleteBeer = function(beerIndex) {
+            
+  this.deleteBeer = function(beerIndex) {
      let beerToDelete = $scope.beers[beerIndex];;
-     $window.confirm('Are you sure? ' + beerToDelete.name + ' will disappear');
-     $scope.beers = beerService.deleteBeer(beerToDelete,$scope.beers);
-     $window.alert("Beer deleted");
-  }
-
-  $scope.saveBeer = function saveBeer(beerName,beerIBU) {
-     if(!beerService.existsBeer(beerName,$scope.beers)) {
+     this.confirmDeleteDialog(beerToDelete.name).then(function(){
+       $scope.beers = beerService.deleteBeer(beerToDelete,$scope.beers);
+       $window.alert("Beer deleted");
+     })
+  };
+  this.confirmDeleteDialog = function(beerName){
+    $mdDialog.show( 
+      $mdDialog.confirm()
+      .title('Would you like to delete ' + beerName + "?")
+      .textContent('It will disappear from the table')
+      .ariaLabel('Lucky day')
+      .ok('Delete')
+      .cancel('Cancel'));
+    }
+  this.saveBeer = function saveBeer(beerName,beerIBU) {
+    if(beerName && beerIBU) {
+      if(!beerService.existsBeer(beerName,$scope.beers)) {
        $scope.beers = beerService.saveBeer(beerName,beerIBU,$scope.beers);
-       $window.alert("Beer added");
-       $scope.showModal();
-     } else {
-         $window.alert("Beer " + beerName + " already exists");
-         $scope.showModal();
-     }
+       $window.alert("Beer " + beerName + " added");
+       $mdDialog.hide();
+       } else {
+          $window.alert("Beer " + beerName + " already exists");
+       }
+    } else{$window.alert("Complete all the fields!");
+
+    }
   };
 
-  $scope.updateBeer = function updateBeer(beerIndex,newbeerName,newbeerIBU) {
-    $scope.beers[beerIndex] = beerService.updateBeer($scope.beers[beerIndex],newbeerName,newbeerIBU);
-    $window.alert("Beer modified");
-    $scope.showModal();
+  this.updateBeer = function updateBeer(beerIndex,newbeerName,newbeerIBU) {
+    if(beerIndex && newbeerName){
+      if(newbeerName !== "" && newbeerIBU !== ""){
+        $scope.beers[beerIndex] = beerService.updateBeer($scope.beers[beerIndex],newbeerName,newbeerIBU);
+        $window.alert("Beer modified");
+        $mdDialog.hide();
+      }
+    }
   };
-  
+
 }]);

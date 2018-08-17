@@ -10,39 +10,27 @@
 
 angular
       .module('proyectoAngularApp')
-.controller('modalController',['$scope', '$mdDialog', function($scope, $mdDialog,) {
-  $scope.modalView = true;
-
-  $scope.hideModal = function() {
-    $scope.modalView = false;
-   };
-
-   $scope.showModal = function() {
-    $scope.modalView = true;
-  };
-   
-   $scope.showAdvanced = function() {
+.controller('modalController',['$scope', '$mdDialog', function($scope, $mdDialog) {
+  
+   this.modalCreate = function() {
      $mdDialog.show({
-        controller: DialogController,
         templateUrl: 'views/modalView.html',
         parent: angular.element(document.body)
      });
    };
 
-   $scope.showAdvancedEdit = function(beerIndex) {
-      $scope.showModal();
+   this.modalEdit = function(beerIndex) {
       $scope.actualBeer = $scope.beers[beerIndex];
       $scope.beerIndex = beerIndex;
       $mdDialog.show({
         scope: $scope,
-        controller: DialogController,
         templateUrl: 'views/modalEditView.html',
         parent: angular.element(document.body)
      });
     };
 
-   $scope.showAlert = function(beer) {
-     $scope.showModal(); 
+   //alert with detail
+   this.modalDetails = function(beer) {
      $mdDialog.show(
        $mdDialog.alert()
          .parent(angular.element(document.querySelector('#popupContainer')))
@@ -53,12 +41,14 @@ angular
          .ok('Cerrar')
      );
    };
+   
+   this.cancel = function() {
+     $mdDialog.cancel();
+     $mdDialog.hide();
+   };
 
-   function DialogController($scope, $mdDialog) {
-     
-     $scope.cancel = function() {
-       $mdDialog.cancel();
-     };
-     
-   }
+   this.hide = function() {
+     $mdDialog.hide();
+   };
+   
 }]);

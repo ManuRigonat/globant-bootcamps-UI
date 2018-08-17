@@ -1,13 +1,11 @@
-<div ng-controller="modalCtrl"> 
-   <div class="container" ng-controller="beerController" >
-      <div ng-hide="modalView">
-         <p>Add Beer</p>
+<div ng-controller="modalController as modal"> 
+   <div class="container" ng-controller="beerController as beer" >
+         <p class="font-weight-bold">Add Beer</p>
          <form>
           Beer name:  <input type="text" name="name" ng-model="name" required><br>
           IBU: <input type="number" name="IBU" ng-model="IBU" required><br><br>
-          <button type="button" ng-click="saveBeer(name,IBU)" class="btn btn-primary">Save changes</button><br><br>
-          <button type="reset" ng-click="cancel()" class="btn btn-danger">Cancel</button>
+          <button type="button" ng-click="beer.saveBeer(name,IBU)" class="btn btn-primary">Save changes</button><br><br>
+          <button type="reset" ng-click="modal.cancel()" class="btn btn-danger">Cancel</button>
          </form>
-      </div>
    </div>
 </div>

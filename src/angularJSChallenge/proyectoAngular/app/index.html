@@ -5,7 +5,6 @@
     <title>AngularJs Proyect</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
@@ -22,15 +21,15 @@
     <![endif]-->
 
     <div class="header">
-      <h1 class="font-weight-bold">Beer List</h1>
+      <h1 class="font-weight-bold text-center">Beer List</h1>
     </div>
 
-    <div ng-controller="modalCtrl">
-        <button class="btn btn-info mb-3" ng-click="showAdvanced()">New beer</button>
+    <div ng-controller="modalController as modal">
+        <button class="btn btn-info mb-3" ng-click="modal.modalCreate()">New beer</button>
     </div>
       <div class="container">
-        <div ng-controller="beerController">
-          <div ng-controller="modalCtrl">
+        <div ng-controller="beerController as beer">
+          <div ng-controller="modalController as modal">
           <table class="table table-hover table-bordered table-responsive">
             <thead class="thead-green">
               <tr>
@@ -43,9 +42,9 @@
             <tbody>
               <tr ng-repeat = "b in beers">
                 <td>{{ b.name }}</td>
-                <td> <button class="btn btn-info" ng-click="showAlert(b)">Details</button> </td>
-                <td> <button class="btn btn-success" ng-click="showAdvancedEdit($index)">Edit</button> </td>
-                <td> <button class="btn btn-danger" ng-click="deleteBeer($index,b)">Delete</button> </td>
+                <td> <button class="btn btn-info" ng-click="modal.modalDetails(b)">Details</button> </td>
+                <td> <button class="btn btn-success" ng-click="modal.modalEdit($index)">Edit</button> </td>
+                <td> <button class="btn btn-danger" ng-click="beer.deleteBeer($index,b)">Delete</button> </td>
               </tr>
             </tbody>
           </table>
@@ -74,7 +73,6 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/services/beerService.js"></script>
-        <script src="scripts/directives/modalDrtv.js"></script>
        <!-- <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script> -->
         <script src="scripts/controllers/beerCtrl.js"></script>
